@@ -4,8 +4,8 @@ const app = express();
 
 app.use(express.static('./frontend/dist'))
 
-app.get('/', (req, res) => {
-    res.send('Yes!')
+app.get('/api/v1/data-combined', (req, res) => {
+
 });
 
 app.listen(config.http.port, () => console.log('Bollerwagen Web Service is running on :' + config.http.port))
