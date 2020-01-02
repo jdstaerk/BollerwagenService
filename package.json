@@ -9,6 +9,7 @@
   "author": "Jan-David Stärk",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pretty-ms": "^5.1.0"
   }
 }
