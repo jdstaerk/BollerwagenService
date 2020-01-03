@@ -6,46 +6,18 @@ const app = express();
 
 app.use(express.static('./frontend/dist'))
 
-var getLoadAvg1m = () =>  {
-    return os.loadavg()[0] + '' || '0';
-}
-
-var getLoadAvg5m = () => {
-    return os.loadavg()[1] + '' || '0';
-}
-
-var getLoadAvg15m = () => {
-    return os.loadavg()[2] + '' || '0';
-}
-
-
 app.get('/api/v1/data-combined', async (req, res) => {
     // Stats we want to display:
     // CPU Temp
     // CPU Load (1m, 5m, 15m, current)
     // RAM
     // (Disk)
-    
+
     let uptimeMS = pMS(((osutils.sysUptime() || 1000) * 1000), { colonNotation: true }).toString();
-    let usedMem = '0';
+
     const q = await Promise.all([
         osutils.freeCommand(),
     ]);
-
-    /*console.log('111');
-    osutils.freeCommand().then(res => {
-        console.log('22')
-        console.log(res)
-        console.log('33')
-        if (res) usedMem = res;
-        console.log('44')
-    }).catch(() => {
-        console.log('55')
-        usedMem = osutils.totalmem();
-        console.log(usedMem);
-        console.log('66')
-    });*/
-    
 
     var data = {};
     data.piStats = [];
