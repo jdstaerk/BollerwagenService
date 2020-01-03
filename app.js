@@ -1,6 +1,7 @@
 const config = require('./config');
 const osutils = require('./lib/osutils');
 const pMS = require('pretty-ms');
+const { exec } = require('child_process');
 const express = require('express');
 const app = express();
 
@@ -40,14 +41,26 @@ app.get('/api/v1/data-combined', async (req, res) => {
 app.get('/api/v1/set-light-effect', (req, res) => {
     // Set different light effect (by id)
     // Mapping:
-    // 0 = Default
-    // 1 = Sinus curve
-    // 2 = Static color Cycle
+    // 0 = Off
+    // 1 = Default
+    // 2 = Sinus curve
+    // 3 = Static color cycle
+    
+    let effect = req.query.status;
+    if (effect) exec('rosservice call /set_light_effect ' + effect)
+
+    res.sendStatus(200);
 });
 
 app.get('/api/v1/set-custom-light', (req, res) => {
     // Set light to "custom" mode and allow the user to set an rgb color on left / right / front / rear
-     
+    if (req.query) exec('rosservice call /set_light_effect 1');
+    if (req.query.front) exec('rosservice call /set_light_rgb 1 ' + req.query.front);
+    if (req.query.right) exec('rosservice call /set_light_rgb 2 ' + req.query.right);
+    if (req.query.rear) exec('rosservice call /set_light_rgb 3 ' + req.query.rear);
+    if (req.query.left) exec('rosservice call /set_light_rgb 4 ' + req.query.left);
+
+    res.sendStatus(200);
 });
 
 app.listen(config.http.port, () => console.log('Bollerwagen Web Service is running on :' + config.http.port))
