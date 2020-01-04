@@ -41,11 +41,6 @@ export default {
         .get("http://raspberrypi.local/api/v1/pi-stats")
         .then(response => {
           this.stats = response.data;
-          /*this.$toasted.show("Befehl gesendet", {
-            theme: "bubble",
-            position: "bottom-right",
-            duration: 2500
-          });*/
         })
         .catch(e => {
           console.error(e);

@@ -7,7 +7,10 @@
     </div>
     <div class="row">
         <RaspberryPiStats id="raspberry-pi-stats" />
-
+    </div>
+    <br />
+    <div class="row">
+        <CommandRunner id="command-runner" />
     </div>
     <br />
     <div class="row box">
@@ -23,14 +26,16 @@
 </template>
 
 <script>
-import LightSettings from "@/components/LightSettings.vue";
 import RaspberryPiStats from "@/components/RaspberryPiStats.vue";
+import CommandRunner from "@/components/CommandRunner.vue";
+import LightSettings from "@/components/LightSettings.vue";
 
 export default {
   name: "home",
   components: {
+    RaspberryPiStats,
+    CommandRunner,
     LightSettings,
-    RaspberryPiStats
   }
 };
 </script>
@@ -47,6 +52,10 @@ export default {
 }
 
 #raspberry-pi-stats {
+    width: 100%;
+}
+
+#command-runner {
     width: 100%;
 }
 </style>
