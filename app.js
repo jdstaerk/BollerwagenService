@@ -31,8 +31,8 @@ app.get('/api/v1/pi-stats', async (req, res) => {
     data = [];
     data.push({ name: 'Uptime', value: uptimeMS || '0' });
     data.push({ name: 'Mem', value: memory || '0' });
-    data.push({ name: 'CPU', value: cpu  || '0' });
     data.push({ name: 'DU', value: usedDiskPct || '0' });
+    data.push({ name: 'CPU', value: cpu  || '0' });
     data.push({ name: 'Load 5m', value: loadAvg5 || '0' });
     data.push({ name: 'Load 15m', value: loadAvg15 || '0' });
 

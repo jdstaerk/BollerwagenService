@@ -39,4 +39,8 @@ label {
   border-radius: 4px;
   margin-bottom: 15px;
 }
+
+.toasted.bubble {
+    background-color: #28a745!important;
+}
 </style>
