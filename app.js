@@ -18,13 +18,13 @@ app.get('/api/v1/data-combined', async (req, res) => {
 
     let uptimeMS = pMS(((osutils.sysUptime() || 1000) * 1000), { colonNotation: true }).toString();
     let usedDiskPct = (q[1].used / q[1].total);
-    if (usedDiskPct) usedDiskPct = (usedDiskPct * 100).toFixed(2) + ' %';
+    if (usedDiskPct) usedDiskPct = (usedDiskPct * 100).toFixed(1) + ' %';
     let cpu = q[2];
-    if (cpu) cpu = (cpu * 100).toFixed(2) + ' %'
+    if (cpu) cpu = (cpu * 100).toFixed(1) + ' %'
     let loadAvg5 = osutils.loadavg(5);
-    if (loadAvg5) loadAvg5 = (loadAvg5 * 100).toFixed(2) + ' %';
+    if (loadAvg5) loadAvg5 = (loadAvg5 * 100).toFixed(1) + ' %';
     let loadAvg15 = osutils.loadavg(15);
-    if (loadAvg15) loadAvg15 = (loadAvg15 * 100).toFixed(2) + ' %';
+    if (loadAvg15) loadAvg15 = (loadAvg15 * 100).toFixed(1) + ' %';
 
     data = {};
     data.piStats = [];
@@ -45,7 +45,7 @@ app.get('/api/v1/set-light-effect', (req, res) => {
     // 1 = Default
     // 2 = Sinus curve
     // 3 = Static color cycle
-    
+
     let effect = req.query.status;
     if (effect) exec('rosservice call /set_light_effect ' + effect)
 
