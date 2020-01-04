@@ -1,7 +1,7 @@
 const config = require('./config');
 const osutils = require('./lib/osutils');
 const pMS = require('pretty-ms');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -45,7 +45,7 @@ app.post('/api/v1/command', (req, res) => {
     if (!command) res.sendStatus(400);
 
     try {
-        exec(command + '');
+        execSync(command + '');
         res.sendStatus(200);
     }
     catch (e) {
