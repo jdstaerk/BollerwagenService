@@ -12,6 +12,10 @@ body {
   background-color: #f5f5f5;
 }
 
+body {
+    border-top: 4px solid rgba(0, 0, 0, 0.9);
+}
+
 #app {
   font-family: "Roboto", sans-serif;
   font-size: 16px;

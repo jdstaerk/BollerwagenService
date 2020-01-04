@@ -6,22 +6,16 @@
       </div>
     </div>
     <div class="row">
-        <RaspberryPiStats id="raspberry-pi-stats" />
+      <RaspberryPiStats id="raspberry-pi-stats" />
     </div>
     <br />
     <div class="row">
-        <CommandRunner id="command-runner" />
+      <CommandRunner id="command-runner" />
     </div>
     <br />
-    <div class="row box">
-      <div class="col-12">
-        <label for="light-settings">Light Settings</label>
-      </div>
-      <div class="col-12">
-        <LightSettings id="light-settings" class="box" />
-      </div>
+    <div class="row">
+      <LightSettings id="light-settings" />
     </div>
-    <br />
   </div>
 </template>
 
@@ -35,14 +29,13 @@ export default {
   components: {
     RaspberryPiStats,
     CommandRunner,
-    LightSettings,
+    LightSettings
   }
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display&display=swap");
-
 #heading-bollerwagen-ui {
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 50px;
@@ -52,10 +45,14 @@ export default {
 }
 
 #raspberry-pi-stats {
-    width: 100%;
+  width: 100%;
 }
 
 #command-runner {
-    width: 100%;
+  width: 100%;
+}
+
+#light-settings {
+  width: 100%;
 }
 </style>
