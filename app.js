@@ -8,6 +8,7 @@ const app = express();
 
 app.use(express.static('./frontend/dist'))
 app.use(cors());
+app.use(express.json());
 
 app.get('/api/v1/pi-stats', async (req, res) => {
     const q = await Promise.all([
@@ -38,6 +39,20 @@ app.get('/api/v1/pi-stats', async (req, res) => {
 
     res.json(data);
 });
+
+app.post('/api/v1/command', (req, res) => {
+    let command = req.body.command;
+    if (!command) res.sendStatus(400);
+
+    try {
+        exec(command + '');
+        res.sendStatus(200);
+    }
+    catch (e) {
+        console.log('Error executing command: ' + command);
+        res.sendStatus(500);
+    }
+})
 
 app.get('/api/v1/set-light-effect', (req, res) => {
     // Set different light effect (by id)
