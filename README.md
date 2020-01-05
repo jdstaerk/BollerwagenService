@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jdstaerk/BollerwagenService.svg?token=d3xHcC2aLx3VpzEWz2fq&branch=master)](https://travis-ci.com/jdstaerk/BollerwagenService/builds)
+
 # BollerwagenService
 
 ## Information
