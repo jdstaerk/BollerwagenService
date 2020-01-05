@@ -16,14 +16,30 @@
       </div>
     </div>
     <div class="row box" style="padding-bottom: 15px;">
-      <div class="col-12" v-show="!isLoading">
-        <select class="custom-select" v-model="lightEffect">
-          <option disabled value="1">Lichteffekt auswählen</option>
+      <div class="col-12">
+        <select class="custom-select" v-model="lightEffect" :disabled="isLoading">
+          <option disabled value="999">Lichteffekt auswählen</option>
           <option v-bind:value="0">Off</option>
           <option v-bind:value="1">Default</option>
           <option v-bind:value="2">Sinus Wave</option>
-          <option v-bind:value="3">Static Color Cycle</option>
+          <option v-bind:value="3">Pulse</option>
+          <option v-bind:value="4">Static Color Cycle</option>
         </select>
+      </div>
+      <br />
+      <div class="col-12 text-center col-color-picker">
+          <verte picker="square" model="rgb" menuPosition="top"></verte>
+      </div>
+      <div class="col-3 col-color-picker"></div>
+      <div class="col-3 col-color-picker">
+          <verte picker="square" model="rgb" menuPosition="top"></verte>
+      </div>
+      <div class="col-3 text-centera col-color-picker">
+          <verte picker="square" model="rgb" menuPosition="top"></verte>
+      </div>
+      <div class="col-3 col-color-picker"></div>
+      <div class="col-12 text-center col-color-picker">
+          <verte picker="square" model="rgb" menuPosition="bottom"></verte>
       </div>
     </div>
   </div>
@@ -31,9 +47,14 @@
 
 <script>
 import axios from "axios";
+import Verte from 'verte';
+import 'verte/dist/verte.css';
 
 export default {
   name: "LightSettings",
+  components: {
+      Verte,
+  },
   data() {
     return {
       isLoading: true,
@@ -74,5 +95,10 @@ export default {
 .row {
   margin-left: 15px;
   margin-right: 15px;
+}
+
+.col-color-picker {
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 </style>
