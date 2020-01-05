@@ -43,6 +43,14 @@ export default {
           this.stats = response.data;
         })
         .catch(e => {
+          this.$toasted.error(
+            "Fehler: Daten konnten nicht aktualisiert werden.",
+            {
+              theme: "bubble",
+              position: "bottom-right",
+              duration: 2500
+            }
+          );
           console.error(e);
         })
         .finally(() => {

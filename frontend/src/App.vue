@@ -13,7 +13,7 @@ body {
 }
 
 body {
-    border-top: 4px solid rgba(0, 0, 0, 0.9);
+  border-top: 4px solid rgba(0, 0, 0, 0.9);
 }
 
 #app {
@@ -42,9 +42,5 @@ label {
   -moz-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 15px;
-}
-
-.toasted.bubble {
-    background-color: #28a745!important;
 }
 </style>

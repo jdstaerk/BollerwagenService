@@ -21,8 +21,8 @@
       </div>
       <div class="col-2 text-right" style="padding-left: 0px;">
         <button type="button" class="btn btn-primary" @click="sendCommand()">
-            <font-awesome-icon v-if="isLoading" icon="redo" :spin="isLoading" />
-            <span v-else>Run</span>
+          <font-awesome-icon v-if="isLoading" icon="redo" :spin="isLoading" />
+          <span v-else>Run</span>
         </button>
       </div>
     </div>
@@ -44,26 +44,30 @@ export default {
   methods: {
     sendCommand: function() {
       this.isLoading = true;
-      let toastMessage = "";
       axios
         .post("http://raspberrypi.local/api/v1/command", {
           command: this.command
         })
         .then(response => {
-          toastMessage = "Befehl erfolgreich ausgeführt.";
-        })
-        .catch(e => {
-          console.error(e);
-          toastMessage =
-            "Der Befehl konnte nicht erfolgreich ausgeführt werden.";
-        })
-        .finally(() => {
-          this.isLoading = false;
-          this.$toasted.show(toastMessage, {
+          this.$toasted.success("Befehl erfolgreich ausgeführt.", {
             theme: "bubble",
             position: "bottom-right",
             duration: 2500
           });
+        })
+        .catch(e => {
+          this.$toasted.error(
+            "Der Befehl konnte nicht erfolgreich ausgeführt werden.",
+            {
+              theme: "bubble",
+              position: "bottom-right",
+              duration: 2500
+            }
+          );
+          console.error(e);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     }
   }
