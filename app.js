@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(express.static('./frontend/dist'))
+app.use(express.static('./frontend/dist'));
 app.use(cors());
 app.use(express.json());
 
@@ -23,7 +23,7 @@ app.get('/api/v1/pi-stats', async (req, res) => {
     let usedDiskPct = (q[1].used / q[1].total);
     if (usedDiskPct) usedDiskPct = (usedDiskPct * 100).toFixed(1) + '%';
     let cpu = q[2];
-    if (cpu) cpu = (cpu * 100).toFixed(1) + '%'
+    if (cpu) cpu = (cpu * 100).toFixed(1) + '%';
     let loadAvg5 = osutils.loadavg(5);
     if (loadAvg5) loadAvg5 = (loadAvg5 * 100).toFixed(1) + '%';
     let loadAvg15 = osutils.loadavg(15);
@@ -52,7 +52,12 @@ app.post('/api/v1/command', (req, res) => {
         console.log('Error executing command: ' + command);
         res.sendStatus(500);
     }
-})
+});
+
+app.get('/api/v1/current-light-effect', (req, res) => {
+    // Mocked rn
+    res.json('1');
+});
 
 app.get('/api/v1/set-light-effect', (req, res) => {
     // Set different light effect (by id)
@@ -63,7 +68,7 @@ app.get('/api/v1/set-light-effect', (req, res) => {
     // 3 = Static color cycle
 
     let effect = req.query.status;
-    if (effect) exec('rosservice call /set_light_effect ' + effect)
+    if (effect) exec('rosservice call /set_light_effect ' + effect);
 
     res.sendStatus(200);
 });
@@ -79,4 +84,4 @@ app.get('/api/v1/set-custom-light', (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(config.http.port, () => console.log('Bollerwagen Web Service is running on :' + config.http.port))
+app.listen(config.http.port, () => console.log('Bollerwagen Web Service is running on :' + config.http.port));
