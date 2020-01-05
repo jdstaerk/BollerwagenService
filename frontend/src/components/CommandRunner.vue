@@ -43,6 +43,16 @@ export default {
   },
   methods: {
     sendCommand: function() {
+        if (!this.command) {
+          this.$toasted.error(
+            "Bitte gib einen Befehl ein, der ausgeführt werden soll.",
+            {
+              theme: "bubble",
+              position: "bottom-right",
+              duration: 3000
+            }
+          );
+        }
       this.isLoading = true;
       axios
         .post("http://raspberrypi.local/api/v1/command", {
