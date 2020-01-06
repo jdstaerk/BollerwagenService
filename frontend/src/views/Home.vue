@@ -35,7 +35,19 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display&display=swap");
+/*@import url("https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display&display=swap");*/
+
+/* sedgwick-ave-display-regular - latin */
+/* sedgwick-ave-display-regular - latin */
+@font-face {
+  font-family: 'Sedgwick Ave Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sedgwick Ave Display Regular'), local('SedgwickAveDisplay-Regular'),
+       url('../fonts/sedgwick-ave-display-v5-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../fonts/sedgwick-ave-display-v5-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
 #heading-bollerwagen-ui {
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 50px;
