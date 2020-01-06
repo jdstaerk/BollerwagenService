@@ -17,7 +17,11 @@
     </div>
     <div class="row box" style="padding-bottom: 15px;">
       <div class="col-12">
-        <select class="custom-select" v-model="lightEffect" :disabled="isLoading">
+        <select
+          class="custom-select"
+          v-model="lightEffect"
+          :disabled="isLoading"
+        >
           <option disabled value="999">Lichteffekt auswählen</option>
           <option v-bind:value="0">Off</option>
           <option v-bind:value="1">Default</option>
@@ -28,18 +32,37 @@
       </div>
       <br />
       <div class="col-12 text-center col-color-picker">
-          <verte picker="square" model="rgb" menuPosition="top"></verte>
+        <verte
+          v-model="colorFront"
+          picker="square"
+          model="rgb"
+          menuPosition="top"
+        ></verte>
       </div>
       <div class="col-3 col-color-picker"></div>
       <div class="col-3 col-color-picker">
-          <verte picker="square" model="rgb" menuPosition="top"></verte>
+        <verte picker="square" model="rgb" menuPosition="top"></verte>
       </div>
       <div class="col-3 text-centera col-color-picker">
-          <verte picker="square" model="rgb" menuPosition="top"></verte>
+        <verte picker="square" model="rgb" menuPosition="top"></verte>
       </div>
       <div class="col-3 col-color-picker"></div>
       <div class="col-12 text-center col-color-picker">
-          <verte picker="square" model="rgb" menuPosition="bottom"></verte>
+        <verte picker="square" model="rgb" menuPosition="bottom"></verte>
+      </div>
+      <br />
+      <div class="col-12">
+        <button
+          type="button"
+          class="btn btn-block btn-primary"
+          @click="setLight()"
+        >
+          <font-awesome-icon
+            v-show="isSendingLightValues"
+            icon="circle-notch"
+            :spin="true"
+          /> Übernehmen
+        </button>
       </div>
     </div>
   </div>
@@ -47,18 +70,23 @@
 
 <script>
 import axios from "axios";
-import Verte from 'verte';
-import 'verte/dist/verte.css';
+import Verte from "verte";
+import "verte/dist/verte.css";
 
 export default {
   name: "LightSettings",
   components: {
-      Verte,
+    Verte
   },
   data() {
     return {
+      isSendingLightValues: false,
       isLoading: true,
-      lightEffect: 0
+      lightEffect: 0,
+      colorFront: "",
+      colorRight: "",
+      colorRear: "",
+      colorLeft: ""
     };
   },
   methods: {
@@ -83,6 +111,34 @@ export default {
         .finally(() => {
           this.isLoading = false;
         });
+    },
+    setLight: function() {
+      this.isSendingLightValues = true;
+      axios
+        .get("http://raspberrypi.local/api/v1/set-light", {
+            params: {
+                lightEffect: this.lightEffect,
+                front: this.colorFront,
+                right: this.colorRight,
+                rear: this.colorRear,
+                left: this.colorLeft,
+            }
+        })
+        .then(response => {})
+        .catch(e => {
+          this.$toasted.error(
+            "Fehler: Licht konnte nicht richtig gesetzt werden.",
+            {
+              theme: "bubble",
+              position: "bottom-right",
+              duration: 2500
+            }
+          );
+          console.error(e);
+        })
+        .finally(() => {
+          this.isSendingLightValues = false;
+        });
     }
   },
   created() {
@@ -98,7 +154,7 @@ export default {
 }
 
 .col-color-picker {
-    margin-bottom: 20px;
-    margin-top: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 </style>
