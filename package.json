@@ -1,7 +1,7 @@
 {
   "name": "bollerwagen-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web UI for a handcart with an electric engine.",
   "main": "app.js",
   "scripts": {
     "test": "jshint app.js"
