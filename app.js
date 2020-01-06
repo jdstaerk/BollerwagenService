@@ -56,30 +56,16 @@ app.post('/api/v1/command', (req, res) => {
 
 app.get('/api/v1/current-light-effect', (req, res) => {
     // Mocked rn
-    res.json('1');
+    res.json(2);
 });
 
-app.get('/api/v1/set-light-effect', (req, res) => {
-    // Set different light effect (by id)
-    // Mapping:
-    // 0 = Off
-    // 1 = Default
-    // 2 = Sinus curve
-    // 3 = Static color cycle
-
-    let effect = req.query.status;
-    if (effect) exec('rosservice call /set_light_effect ' + effect);
-
-    res.sendStatus(200);
-});
-
-app.get('/api/v1/set-custom-light', (req, res) => {
+app.get('/api/v1/set-light', (req, res) => {
     // Set light to "custom" mode and allow the user to set an rgb color on left / right / front / rear
-    if (req.query) exec('rosservice call /set_light_effect 1');
-    if (req.query.front) exec('rosservice call /set_light_rgb 1 ' + req.query.front);
-    if (req.query.right) exec('rosservice call /set_light_rgb 2 ' + req.query.right);
-    if (req.query.rear) exec('rosservice call /set_light_rgb 3 ' + req.query.rear);
-    if (req.query.left) exec('rosservice call /set_light_rgb 4 ' + req.query.left);
+    if (req.query.lightEffect) execSync('rosservice call /set_light_effect ' + req.query.lightEffect);
+    if (req.query.front) execSync('rosservice call /set_light_rgb 1 ' + req.query.front);
+    if (req.query.right) execSync('rosservice call /set_light_rgb 2 ' + req.query.right);
+    if (req.query.rear) execSync('rosservice call /set_light_rgb 3 ' + req.query.rear);
+    if (req.query.left) execSync('rosservice call /set_light_rgb 4 ' + req.query.left);
 
     res.sendStatus(200);
 });
