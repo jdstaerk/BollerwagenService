@@ -38,7 +38,7 @@ export default {
     fetchData: function() {
       this.isLoading = true;
       axios
-        .get("http://raspberrypi.local/api/v1/pi-stats")
+        .get("/api/v1/pi-stats")
         .then(response => {
           this.stats = response.data;
         })

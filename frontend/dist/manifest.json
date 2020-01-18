@@ -3,7 +3,7 @@
     "short_name": "BUI",
     "description": "Steuer deinen E-Bollerwagen mit dieser App! Ändere die Lichteffekte und schau dir Insights an.",
     "lang": "de-DE",
-    "start_url": "http://raspberrypi.local",
+    "start_url": "http://192.168.42.2",
     "display": "standalone",
     "orientation": "portrait",
     "icons": [{

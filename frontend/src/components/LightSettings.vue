@@ -93,7 +93,7 @@ export default {
     fetchLightData: function() {
       this.isLoading = true;
       axios
-        .get("http://raspberrypi.local/api/v1/current-light-effect")
+        .get("/api/v1/current-light-effect")
         .then(response => {
           this.lightEffect = response.data;
         })
@@ -115,7 +115,7 @@ export default {
     setLight: function() {
       this.isSendingLightValues = true;
       axios
-        .get("http://raspberrypi.local/api/v1/set-light", {
+        .get("/api/v1/set-light", {
             params: {
                 lightEffect: this.lightEffect,
                 front: this.colorFront,

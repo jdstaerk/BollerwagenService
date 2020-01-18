@@ -55,7 +55,7 @@ export default {
         }
       this.isLoading = true;
       axios
-        .post("http://raspberrypi.local/api/v1/command", {
+        .post("/api/v1/command", {
           command: this.command
         })
         .then(response => {
